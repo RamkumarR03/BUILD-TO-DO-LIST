@@ -3,33 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">    
+    <title>TO-DO List</title>
+    <link rel="stylesheet" href="style.css">
+  
 </head>
 <body>
     <div class="container">
-        <h1>BUILD-TO-DO-LIST</h1><br>
-        <form action="">
-            <input type="text" name="add" id="add1" placeholder="Add some task">
-            <button onclick="add()">ADD</button><br><br><br><br><input type="text" id="remove1" value="Delete this one">
-<button onclick="remove()">DELETE</button><br><br>
-<input type="text" id="remove2" value="Delete this one">
-<button onclick="remove()">DELETE</button><br><br>
-<input type="text" id="remove3"  value="Delete this one">
-<button onclick="remove()">DELETE</button><br><br>
-        </form>
+        <h1>BUILd-TO-DO LIST</h1>
+        <input type="text" id="taskInput" placeholder="Add some task">
+        <button id="addTaskButton">ADD</button>
+        <div id="taskList"></div>
     </div>
 
-
     <script>
-        function add(){
-            var message=document.getElementById("add1");
-            message.innerText="";
-
+        const taskInput = document.getElementById('taskInput');
+        const addTaskButton = document.getElementById('addTaskButton');
+        function addTask() {
+        const taskText = taskInput.value.trim();
+        if (taskText !== '') {
+                const taskDiv = document.createElement('div');
+                taskDiv.className = 'task';
+                const taskContent = document.createElement('span');
+                taskContent.textContent = taskText;
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'DELETE';
+                deleteButton.className = 'deleteButton';
+                deleteButton.addEventListener('click', function() {
+                    taskDiv.remove();
+                });
+                 taskDiv.appendChild(taskContent);
+                taskDiv.appendChild(deleteButton);
+                 document.getElementById('taskList').appendChild(taskDiv);
+                taskInput.value = '';
+            }
         }
-
+            addTaskButton.addEventListener('click', addTask);
     </script>
-
-
 </body>
 </html>
